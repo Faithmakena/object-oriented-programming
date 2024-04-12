@@ -1,0 +1,50 @@
+# Define an interface
+class Animal:
+    def sound(self):
+        pass
+
+# Implement classes using inheritance
+class Dog(Animal):
+    def sound(self):
+        return "Woof!"
+
+class Cat(Animal):
+    def sound(self):
+        return "Meow!"
+
+# Class that overrides an inherited method
+class BigDog(Dog):
+    def sound(self):
+        return "WOOF!"
+
+# Class that initializes data from a file
+class Zoo:
+    def __init__(self, filename):
+        self.animals = []
+        with open(filename, 'r') as file:
+            for line in file:
+                parts = line.strip().split(',')
+                if len(parts) == 2:
+                    animal_type, name = parts
+                    if animal_type == 'Dog':
+                        self.animals.append(Dog(name))
+                    elif animal_type == 'Cat':
+                        self.animals.append(Cat(name))
+                    elif animal_type == 'BigDog':
+                        self.animals.append(BigDog(name))
+
+    def make_sounds(self):
+        for animal in self.animals:
+            print(animal.sound())
+
+# Method demonstrating the use of a loop
+def count_to_ten():
+    for i in range(1, 11):
+        print(i)
+
+# Initialize and use the classes
+if __name__ == "__main__":
+    zoo = Zoo("animals.txt")
+    zoo.make_sounds()
+
+    count_to_ten()
